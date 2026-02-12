@@ -3,6 +3,7 @@ const ctrl = require('../controllers/productController');
 const auth = require('../middleware/authMiddleware');
 const admin = require('../middleware/roleMiddleware');
 
+router.get('/categories', ctrl.getCategories);
 router.get('/', ctrl.getProducts);
 router.get('/:id', ctrl.getProductById);
 

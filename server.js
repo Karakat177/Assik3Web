@@ -15,8 +15,11 @@ app.use('/api/products', require('./routes/productRoutes'));
 app.use('/api/orders', require('./routes/orderRoutes'));
 app.use('/api/auth', require('./routes/authRoutes'));
 
+// Serve static files
+app.use(express.static('.'));
+
 app.get('/', (req, res) => {
-    res.send('Server is working');
+    res.sendFile(__dirname + '/index.html');
 });
 
 app.listen(process.env.PORT, () =>
