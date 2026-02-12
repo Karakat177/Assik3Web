@@ -1,387 +1,144 @@
-# 👟 Sneaker Store v2.1 - Complete User Guide
+# 👟 Sneaker Premium Store - Fullstack Web Application
 
-## 🎉 What Was Added
-
-### Main Improvement: **Detailed Product View Before Order**
-
-Now when a user clicks on a product:
-1. **First** a beautiful window opens with full information:
-   - 📸 Large product photo
-   - 📝 Title, brand, category
-   - 💰 Price
-   - 📏 All available sizes (blue badges)
-   - 📋 Detailed product description
-
-2. **Then** (after clicking "Order Now") the order form opens
+## 🎓 Project Overview
+This project is a comprehensive E-commerce platform dedicated to sneaker enthusiasts. It was developed as a university assignment to demonstrate proficiency in **Fullstack Web Development**, focusing on the **MERN-like stack** (using Handlebars/HTML instead of React for simplicity) and the **MVC Architecture**.
 
 ---
 
-## 🚀 Quick Start
+## 🏗 System Architecture (MVC Pattern)
+The application is built using the **Model-View-Controller (MVC)** architectural pattern, ensuring a clean separation of concerns:
 
-### Installation and Launch
+* **Models (`/models`):** Define the data structure for Users, Products, and Orders using Mongoose schemas.
+* **Views (`index.html`):** A dynamic Single Page Application (SPA) interface that interacts with the API.
+* **Controllers (`/controllers`):** Contain the business logic, such as authentication, price calculation, and order processing.
+* **Routes (`/routes`):** Define the API endpoints and map them to specific controller functions.
+* **Middleware (`/middleware`):** Handles security tasks like JWT Authentication and Role-Based Access Control (RBAC).
+
+---
+
+## 🛠 Tech Stack
+ # Sneaker Premium Store — University Project Report
+
+## 1. Project Summary
+
+Sneaker Premium Store is a full-stack e-commerce web application built as a university project to demonstrate practical skills in backend and frontend development, RESTful API design, authentication, and database modeling. The application enables two types of users: customers who browse and order sneakers, and administrators who manage products and orders.
+
+Objectives:
+- Implement a maintainable MVC-style architecture.
+- Provide secure user authentication and role-based access control.
+- Build a responsive SPA-like frontend that consumes a JSON API.
+- Demonstrate end-to-end functionality: product management, ordering, and order tracking.
+
+## 2. System Architecture
+
+The application follows a clear separation of concerns:
+
+- Models (`/models`): Mongoose schemas for `User`, `Product`, and `Order` capture application data and constraints.
+- Controllers (`/controllers`): Handle business logic such as user registration/login, product operations, and order lifecycle.
+- Routes (`/routes`): Define RESTful endpoints and attach middleware for authentication and authorization.
+- Middleware (`/middleware`): JWT-based `protect` middleware for authenticated routes and `admin` middleware for role checks.
+- Frontend (`index.html`): A single HTML file with JavaScript that acts as a client, handling UI state and API calls via the Fetch API.
+
+Core technologies: Node.js, Express.js, MongoDB (Mongoose), JSON Web Tokens (JWT), bcrypt for password hashing, and vanilla JavaScript for the frontend.
+
+## 3. Key Features
+
+- Authentication & Authorization:
+   - User registration and login with securely hashed passwords.
+   - JWT tokens issued on login to protect API endpoints.
+   - Role-based access control: `admin` users can manage products and orders.
+
+- Product Management:
+   - Admins can add, edit, and delete products.
+   - Products include title, brand, category, price, image URL, available sizes, and stock state.
+   - Frontend supports category filtering and live search.
+
+- Ordering & Order Management:
+   - Customers can place orders selecting size, quantity, address, and phone.
+   - Total price is calculated client-side and validated server-side.
+   - Order statuses (pending, confirmed, shipped, delivered) are manageable by admins.
+
+- Usability & UX:
+   - Responsive layout for desktop and mobile.
+   - Product detail modal before ordering to improve conversion confidence.
+
+## 4. Installation and Usage (Developer Steps)
+
+1. Clone the repository and install dependencies:
+
 ```bash
-cd /Users/karakatibraim/Assik3Web
+git clone <repo-url>
+cd Assik3Web
 npm install
+```
+
+2. Create a `.env` file in the project root with the following variables:
+
+```env
+PORT=3000
+MONGO_URI=<your_mongodb_connection_string>
+JWT_SECRET=<a_secure_random_string>
+```
+
+3. Seed the database (optional) to load sample products:
+
+```bash
+node seed.js
+```
+
+4. Start the server:
+
+```bash
 npm start
 ```
 
-Open: **http://localhost:5000**
-
-### First Login - Admin
-1. Click "Sign Up"
-2. Fill in:
-   ```
-   Name:     Admin
-   Email:    admin@test.com
-   Password: 123456
-   Role:     Admin ✅
-   ```
-3. Click "Sign Up"
-
-### Add Your First Product
-1. Select **"Add Product"** from menu
-2. Fill in the form (example below)
-3. Click **"Add Product"**
-
-#### Product Example:
-```
-Title:       Nike Air Max 90
-Brand:       Nike
-Price:       129.99
-Image URL:   https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&h=500&fit=crop
-Description: Classic Nike Air Max 90 sneakers with legendary air cushioning. 
-             Perfect for everyday wear and sports.
-Category:    Casual Sneakers
-Sizes:       Select all (38-45)
-Stock:       ✅ In Stock
-```
-
----
-
-## 👤 Testing as User
-
-### 1. Create an Account
-```
-Name:     User
-Email:    user@test.com  
-Password: 123456
-Role:     Customer (default)
-```
-
-### 2. View a Product
-1. Click on any product in the catalog
-2. **"Product Details"** window will open with product information
-3. View:
-   - ✅ Product photo
-   - ✅ Title and brand
-   - ✅ Sizes (blue badges)
-   - ✅ Description
-4. Click **"Order Now"**
-
-### 3. Place an Order
-1. Fill in the form:
-   ```
-   Size:    42 (select)
-   Qty:     2
-   Address: 123 Main St, NYC
-   Phone:   +1 (555) 123-4567
-   ```
-2. See: **Total: $259.98** (updates automatically)
-3. Click **"Place Order"**
-
-### 4. View Your Orders
-1. Select **"My Orders"** from menu
-2. See your order card with:
-   - Product photo
-   - Size and quantity
-   - Total cost
-   - Status (yellow - pending)
-
----
-
-## 👨‍💼 Order Management (Admin)
-
-1. Select **"Orders"** from menu
-2. See table of all orders
-3. Click dropdown to change status:
-   - `pending` (yellow) → 
-   - `confirmed` (blue) → 
-   - `shipped` (purple) → 
-   - `delivered` (green)
-
----
-
-## 📁 Project Structure
+5. Open the frontend in the browser (server serves static files):
 
 ```
-/Assik3Web
-├── server.js                 # Main Express server
-├── index.html               # Frontend (HTML + CSS + JS)
-├── package.json             # Dependencies
-├── .env                     # Environment variables
-│
-├── models/
-│   ├── User.js              # User model
-│   ├── Product.js           # Product model
-│   └── Order.js             # Order model
-│
-├── controllers/
-│   ├── authController.js    # Authentication logic
-│   ├── productController.js # Product logic
-│   └── orderController.js   # Order logic
-│
-├── routes/
-│   ├── authRoutes.js        # Authentication routes
-│   ├── productRoutes.js     # Product routes
-│   └── orderRoutes.js       # Order routes
-│
-├── middleware/
-│   ├── authMiddleware.js    # Token verification
-│   └── roleMiddleware.js    # Role verification
-│
-└── docs/
-    ├── README.md            # This file
-    ├── SETUP.md             # Detailed setup
-    ├── FEATURES.md          # All features description
-    ├── TESTING.md           # Testing instructions
-    ├── CHANGELOG.md         # Change history
-    ├── SAMPLE_PRODUCTS.js   # Product examples
-    └── REPORT.md            # Full change report
+http://localhost:3000
 ```
 
----
+Notes:
+- If your MongoDB Atlas DNS lookup fails (DNS or network issue), the server contains retry logic and will continue running in a degraded mode until the database is reachable.
 
-## 🎨 New Windows (v2.1)
+## 5. Testing and Demonstration
 
-### Product Details Window
-**When:** Click on a product in the catalog
-**Contains:**
-- 📸 Large photo (350x350px)
-- 📝 Product information
-- 💰 Price (large font)
-- 📏 Sizes (blue badges)
-- 📋 Product description
-- 🛒 "Order Now" button
+- Endpoints to test authentication:
+   - `POST /api/auth/register` — create a new user (name, email, password, role)
+   - `POST /api/auth/login` — login and receive a JWT token
+   - `GET /api/auth/me` — retrieve current user (requires `Authorization: Bearer <token>`)
 
-### Order Form Window
-**When:** Click "Order Now"
-**Contains:**
-- Form to fill
-- Size selection
-- Quantity selection
-- Delivery address
-- Phone number
-- **Cost calculation** (updates automatically)
+- Product endpoints:
+   - `GET /api/products` — list products
+   - `GET /api/products/:id` — product detail
+   - `POST /api/products` — create product (admin only)
 
----
+- Order endpoints:
+   - `POST /api/orders` — create order (authenticated users)
+   - `GET /api/orders/user/my-orders` — get orders for the logged-in user
+   - `GET /api/orders` — admin: list all orders
 
-## 📊 Features by Role
+Manual tests performed during development:
+- Created an admin account and verified admin dashboard access.
+- Registered customer accounts, placed orders, and verified that order status updates are reflected to customers.
 
-### 👤 User (Customer)
-- ✅ Registration and login
-- ✅ View product catalog
-- ✅ Filter by categories
-- ✅ View full product information
-- ✅ Place an order
-- ✅ View order history
-- ✅ Track order status
+## 6. Design Decisions and Rationale
 
-### 👨‍💼 Administrator (Admin)
-- ✅ Registration and login
-- ✅ Add new products
-- ✅ Edit products (planned)
-- ✅ Delete products
-- ✅ View all orders
-- ✅ Manage order statuses
-- ✅ View catalog
+- Vanilla JavaScript Frontend: Chosen to keep the project lightweight and focus on backend fundamentals and API design.
+- JWT Authentication: Stateless tokens simplify session management for the SPA and make API testing straightforward.
+- MVC Organization: Keeps code modular and testable; controllers are focused on business rules while models encapsulate data constraints.
+
+## 7. Limitations and Future Work
+
+- Payment Integration: No payment provider is integrated; future work should add a secure payment gateway (Stripe/PayPal).
+- Image Uploads: Currently products use image URLs; support for file uploads and cloud storage would improve reliability.
+- Tests: Add automated unit and integration tests (Mocha/Jest + Supertest) to ensure regression safety.
+- Pagination & Performance: Add pagination and caching for product listings in larger datasets.
+
+## 8. Conclusion
+
+This project demonstrates practical full-stack development skills, including API design, authentication, role-based authorization, database modeling, and responsive frontend development. It provides a solid foundation for further enhancements (payments, CI/CD, automated tests) and can be extended into a production-grade platform with incremental improvements.
 
 ---
 
-## 🔧 API Endpoints
 
-### Authentication
-```
-POST   /api/auth/register    - Register
-POST   /api/auth/login       - Login
-GET    /api/auth/me          - Get current user
-```
-
-### Products
-```
-GET    /api/products         - All products
-GET    /api/products/:id     - Specific product
-GET    /api/products/categories - List of categories
-POST   /api/products         - Add product (admin)
-PUT    /api/products/:id     - Update product (admin)
-DELETE /api/products/:id     - Delete product (admin)
-```
-
-### Orders
-```
-POST   /api/orders           - Create order
-GET    /api/orders/user/my-orders - My orders
-GET    /api/orders           - All orders (admin)
-PUT    /api/orders/:id       - Change status (admin)
-DELETE /api/orders/:id       - Delete order (admin)
-```
-
----
-
-## 🐛 Troubleshooting
-
-### Server won't start
-```bash
-# Check port 5000
-# Check .env file
-# Make sure MongoDB is available
-npm start
-```
-
-### MongoDB error
-```bash
-# Check MONGO_URI in .env
-# For local DB use:
-MONGO_URI=mongodb://localhost:27017/sneaker-store
-
-# For cloud DB use MongoDB Atlas:
-MONGO_URI=mongodb+srv://user:password@cluster.mongodb.net/dbname
-```
-
-### CORS error
-```bash
-# This is normal during local testing
-# Make sure the frontend is connecting to the correct port (5000)
-```
-
-### Images not loading
-- Use full URLs: `https://...`
-- Or upload images to a cloud service (e.g., unsplash.com)
-
----
-
-## 📚 Documentation
-
-### For Beginners
-- Start with [FEATURES.md](./FEATURES.md) - detailed description of new features
-- Then [TESTING.md](./TESTING.md) - step-by-step guide
-
-### For Developers
-- [REPORT.md](./REPORT.md) - complete report of all changes
-- [SETUP.md](./SETUP.md) - detailed technical documentation
-- [SAMPLE_PRODUCTS.js](./SAMPLE_PRODUCTS.js) - sample data
-
----
-
-## ✨ Key Improvements v2.1
-
-| Feature | Description |
-|---------|---------|
-| 👁️ Details Window | Full product information before ordering |
-| 📏 Visual Sizes | Blue badges with all available sizes |
-| 📋 Descriptions | Detailed description for each product |
-| 💡 Better UX | Two-stage purchase process |
-| 📱 Responsive Design | Works on all devices |
-| ⚡ Cost Calculation | Updates when quantity changes |
-
----
-
-## 🎓 Usage Examples
-
-### Adding a Product with Description
-```javascript
-{
-  "title": "Nike Air Max 90",
-  "brand": "Nike",
-  "price": 129.99,
-  "image": "https://...",
-  "description": "Classic Nike Air Max 90 sneakers...",
-  "category": "Casual Sneakers",
-  "sizes": [38, 39, 40, 41, 42, 43, 44, 45]
-}
-```
-
-### Viewing a Product
-1. Click on a product card
-2. A window with full information opens
-3. Click "Order Now" to place an order
-
-### Managing Orders (Admin)
-1. Go to "Orders"
-2. Find the order
-3. Change status: pending → confirmed → shipped → delivered
-
----
-
-## 🔐 Security
-
-- ✅ JWT authentication
-- ✅ Server-side role verification
-- ✅ Data validation
-- ✅ Password protection (bcrypt)
-- ⚠️ **Important:** Change `JWT_SECRET` in `.env`
-
----
-
-## 📞 Support
-
-### Frequently Asked Questions
-
-**Q: How do I add my own product image?**
-A: Use a cloud service (unsplash.com, cloudinary.com) and insert the full URL
-
-**Q: Can I add multiple photos for one product?**
-A: Planned for v3.0. Currently only one photo is supported
-
-**Q: How do I export orders?**
-A: Not currently supported. Planned for v2.2
-
-**Q: How do I change the currency?**
-A: Edit the "$" symbol in the code (index.html, controllers)
-
----
-
-## 🚀 Future Improvements (v3.0)
-
-- [ ] Product photo gallery
-- [ ] Ratings and reviews
-- [ ] Email notifications
-- [ ] Payment system
-- [ ] Order export
-- [ ] Sales analytics
-- [ ] Discount system
-
----
-
-## 📊 Versioning
-
-| Version | Date | Status |
-|--------|------|--------|
-| v2.0 | 12.02.2026 | ✅ Complete |
-| v2.1 | 12.02.2026 | ✅ Complete |
-| v2.2 | planned | 📅 In development |
-| v3.0 | planned | 📅 In development |
-
----
-
-## 📄 License
-
-This project was created for educational purposes.
-
----
-
-## 👨‍💻 Author
-
-**Development Team**
-- Last updated: February 12, 2026
-- Version: 2.1
-- Status: ✅ Ready for use
-
----
-
-## 📞 Contacts
-
-If you have questions or suggestions for improvement, please contact the development team.
-
----
-
-**Thank you for using Sneaker Store! 👟**
